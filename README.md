@@ -25,7 +25,7 @@ behaviour that still matter when the app runs today.
 | **Use /user/ for profiles** | Replaces the deprecated /u/ profile endpoint with /user/, which Reddit still serves. User profile requests (about, friend and unfriend) use this path, so profiles fail to load without it. |
 | **Show commenter's top subreddits** | Adds a line under each comment with the three subreddits the commenter is most active in, worked out from their recent public activity on Project Arctic Shift. Answers are cached per author; the archive is asked in the background. |
 | **Move the card score to the bottom** | In the list, compact and smaller card layouts, splits the score line out of the post description and stretches the text over the full row: title at the top, points and comments at the bottom, author and flair sharing the space between. |
-| **Hide the card dropdown button** | Hides the expand chevron on the right side of each post in the list, compact and smaller card layouts. |
+| **Hide the card dropdown button** | Hides the expand chevron on the right side of each post in the list, compact and smaller card layouts, and gives its width back to the post text. |
 
 ## Building
 

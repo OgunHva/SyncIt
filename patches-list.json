@@ -1,6 +1,6 @@
 {
   "NOTE": "Do NOT manually edit this file. This file is automatically updated when semantic release (release.yml) runs. Manually editing this file can break your releases and break third party tools that use this file.",
-  "version": "1.6.2",
+  "version": "1.6.3",
   "patches": [
     {
       "name": "Color comment scores",
@@ -58,7 +58,7 @@
     },
     {
       "name": "Hide the card dropdown button",
-      "description": "Hides the expand chevron on the right side of each post in the list, compact and smaller card layouts.",
+      "description": "Hides the expand chevron on the right side of each post in the list, compact and smaller card layouts, and gives its width back to the post text.",
       "default": true,
       "category": null,
       "compatiblePackages": [
