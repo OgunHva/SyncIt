@@ -17,8 +17,9 @@ private const val EXTENSION_CLASS_DESCRIPTOR =
 @Suppress("unused")
 val commentScoreColorPatch = patch(
     name = "Color comment scores",
-    description = "Colors a comment's points orange when positive and purple when negative. " +
-            "The more points a comment has, the stronger the color. Hidden scores are left alone."
+    description = "Colors a comment's score number orange when positive and purple when negative. " +
+            "The more points a comment has, the stronger the color. The word points keeps the normal " +
+            "text color. Hidden scores are left alone."
 ) {
     compatibleWith(SYNC_FOR_REDDIT)
 

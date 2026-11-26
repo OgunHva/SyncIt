@@ -17,8 +17,8 @@ private const val EXTENSION_CLASS_DESCRIPTOR =
 @Suppress("unused")
 val scoreColorPatch = patch(
     name = "Color post scores",
-    description = "Colors a post's points orange when positive and purple when negative. " +
-            "The more points a post has, the stronger the color."
+    description = "Colors a post's score number orange when positive and purple when negative. " +
+            "The more points a post has, the stronger the color. The word points keeps the normal text color."
 ) {
     compatibleWith(SYNC_FOR_REDDIT)
 

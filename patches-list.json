@@ -1,10 +1,10 @@
 {
   "NOTE": "Do NOT manually edit this file. This file is automatically updated when semantic release (release.yml) runs. Manually editing this file can break your releases and break third party tools that use this file.",
-  "version": "1.5.0",
+  "version": "1.5.1",
   "patches": [
     {
       "name": "Color comment scores",
-      "description": "Colors a comment's points orange when positive and purple when negative. The more points a comment has, the stronger the color. Hidden scores are left alone.",
+      "description": "Colors a comment's score number orange when positive and purple when negative. The more points a comment has, the stronger the color. The word points keeps the normal text color. Hidden scores are left alone.",
       "default": true,
       "category": null,
       "compatiblePackages": [
@@ -31,7 +31,7 @@
     },
     {
       "name": "Color post scores",
-      "description": "Colors a post's points orange when positive and purple when negative. The more points a post has, the stronger the color.",
+      "description": "Colors a post's score number orange when positive and purple when negative. The more points a post has, the stronger the color. The word points keeps the normal text color.",
       "default": true,
       "category": null,
       "compatiblePackages": [

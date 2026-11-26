@@ -45,6 +45,17 @@ public final class ScoreColorPatch {
             return;
         }
 
+        // Color the number only. The text is "<n> point(s)", so the first space found walking
+        // back from the end is the one before the word. Without one, color the whole score.
+        int numberEnd = end;
+        while (numberEnd > start && builder.f(numberEnd - 1) != ' ') {
+            numberEnd--;
+        }
+        int coloredEnd = numberEnd > start ? numberEnd - 1 : end;
+        if (coloredEnd <= start) {
+            return;
+        }
+
         int tint = score > 0 ? POSITIVE : NEGATIVE;
         float magnitude = Math.min(Math.abs((float) score), (float) FULL_TINT_SCORE);
         // Logarithmic, so the first handful of points is where most of the change happens and a
@@ -52,7 +63,7 @@ public final class ScoreColorPatch {
         float level = (float) (Math.log10(1 + magnitude) / Math.log10(1 + FULL_TINT_SCORE));
         float amount = MIN_TINT + (1 - MIN_TINT) * level;
 
-        builder.s(new ForegroundColorSpan(blend(i.x(), tint, amount)), start, end, 33);
+        builder.s(new ForegroundColorSpan(blend(i.x(), tint, amount)), start, coloredEnd, 33);
     }
 
     /** Mixes [amount] of [to] into [from], keeping the result opaque. */

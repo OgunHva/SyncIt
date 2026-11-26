@@ -20,6 +20,11 @@ public class c {
         throw new UnsupportedOperationException("Stub");
     }
 
+    /** The character at the given position. */
+    public char f(int index) {
+        throw new UnsupportedOperationException("Stub");
+    }
+
     /** Puts a span over the given range of text. */
     public void s(Object span, int start, int end, int flags) {
         throw new UnsupportedOperationException("Stub");
