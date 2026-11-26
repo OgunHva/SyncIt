@@ -1,6 +1,6 @@
 {
   "NOTE": "Do NOT manually edit this file. This file is automatically updated when semantic release (release.yml) runs. Manually editing this file can break your releases and break third party tools that use this file.",
-  "version": "1.7.0",
+  "version": "1.6.2",
   "patches": [
     {
       "name": "Color comment scores",
@@ -113,33 +113,6 @@
     {
       "name": "Move the card score to the bottom",
       "description": "Splits the score line out of the post description in the list, compact and smaller card layouts, then stretches the text over the full row height: the title sits at the top, the points and comments at the bottom, and the author line and flair share the space between them. Full card layouts are unchanged.",
-      "default": true,
-      "category": null,
-      "compatiblePackages": [
-        {
-          "packageName": "com.laurencedawson.reddit_sync",
-          "name": "Sync for Reddit",
-          "description": null,
-          "apkFileType": "APK",
-          "appIconColor": "#FF4500",
-          "signatures": null,
-          "formFactor": "MOBILE",
-          "targets": [
-            {
-              "version": "v23.06.30-13:39",
-              "versionCodes": null,
-              "isExperimental": false,
-              "minSdk": null,
-              "description": null
-            }
-          ]
-        }
-      ],
-      "options": []
-    },
-    {
-      "name": "Put list thumbnails on the right",
-      "description": "Forces the list, compact and smaller card layouts to draw their thumbnails on the right side, as if the Align thumbnail right setting were on.",
       "default": true,
       "category": null,
       "compatiblePackages": [
