@@ -23,7 +23,9 @@ tasks {
     register<JavaExec>("generatePatchesList") {
         description = "Build patch with patch list"
 
-        dependsOn(build)
+        // buildAndroid, not build: the plain jar has no classes.dex, and writing the list
+        // from it would leave a bundle that Manager cannot load on Android.
+        dependsOn("buildAndroid")
 
         classpath = sourceSets["main"].runtimeClasspath + patchListGeneratorClasspath
         mainClass.set("util.PatchListGeneratorKt")
