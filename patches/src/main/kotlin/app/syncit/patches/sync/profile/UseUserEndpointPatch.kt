@@ -20,9 +20,9 @@ val useUserEndpointPatch = patch(
 
     execute {
         profileEndpointFingerprints.forEach { fingerprint ->
-            // Empty when another bundle already replaced the path, which is fine: there is
-            // nothing left to do.
-            fingerprint.matchAll().forEach { match ->
+            // Null when another bundle already replaced the path, which is fine: there is
+            // nothing left to do. matchAll() would throw in that case.
+            fingerprint.matchAllOrNull().orEmpty().forEach { match ->
                 val stringIndex = match.stringMatches.first().index
 
                 val instruction =
