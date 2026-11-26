@@ -3,8 +3,10 @@ package app.syncit.extension;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 /**
@@ -40,7 +42,7 @@ public final class CardScoreReorder {
 
         CharSequence text = description.getText();
         if (!(text instanceof Spanned)) {
-            hide(scoreView);
+            hide(description, scoreView);
             return;
         }
 
@@ -49,7 +51,7 @@ public final class CardScoreReorder {
         int newline = plain.lastIndexOf('\n');
         if (newline < 0 || newline + 1 >= plain.length()) {
             // No score line on this post, or it was turned off.
-            hide(scoreView);
+            hide(description, scoreView);
             return;
         }
 
@@ -80,6 +82,67 @@ public final class CardScoreReorder {
                 description.getPaddingLeft(), 0, description.getPaddingRight(), 0);
         scoreView.setText(score);
         scoreView.setVisibility(View.VISIBLE);
+
+        fillHeight(description, scoreView);
+    }
+
+    /**
+     * Stretches the text block over the whole row, so the title sits at the top and the score at
+     * the bottom. The author line and the flair take an equal share of the space between them.
+     */
+    private static void fillHeight(TextView description, TextView scoreView) {
+        if (!(description.getParent() instanceof LinearLayout)) {
+            return;
+        }
+
+        LinearLayout wrapper = (LinearLayout) description.getParent();
+        View row = (View) wrapper.getParent();
+        if (row == null) {
+            return;
+        }
+
+        int scoreIndex = wrapper.indexOfChild(scoreView);
+        if (scoreIndex <= 0) {
+            return;
+        }
+        View flair = wrapper.getChildAt(scoreIndex - 1);
+
+        agree(description, true);
+        agree(flair, true);
+        agree(scoreView, false);
+
+        wrapper.setGravity(Gravity.TOP);
+
+        // Measure the row from the content first, then pin the text block to that height.
+        ViewGroup.LayoutParams wrapperParams = wrapper.getLayoutParams();
+        wrapperParams.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+        wrapper.setLayoutParams(wrapperParams);
+
+        row.post(() -> {
+            int height = row.getHeight();
+            if (height <= 0) {
+                return;
+            }
+            ViewGroup.LayoutParams params = wrapper.getLayoutParams();
+            if (params.height != height) {
+                params.height = height;
+                wrapper.setLayoutParams(params);
+            }
+        });
+    }
+
+    /** Gives a middle line a share of the leftover height, or none. */
+    private static void agree(View view, boolean weighted) {
+        if (!(view.getLayoutParams() instanceof LinearLayout.LayoutParams)) {
+            return;
+        }
+        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) view.getLayoutParams();
+        params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+        params.weight = weighted ? 1f : 0f;
+        view.setLayoutParams(params);
+        if (view instanceof TextView) {
+            ((TextView) view).setGravity(weighted ? Gravity.CENTER_VERTICAL : Gravity.TOP);
+        }
     }
 
     private static TextView findScoreView(ViewGroup parent) {
@@ -92,8 +155,31 @@ public final class CardScoreReorder {
         return null;
     }
 
-    private static void hide(TextView scoreView) {
+    private static void hide(TextView description, TextView scoreView) {
         scoreView.setText("");
         scoreView.setVisibility(View.GONE);
+        releaseHeight(description, scoreView);
+    }
+
+    /** Returns the row to its content height when there is no score line to anchor at the bottom. */
+    private static void releaseHeight(TextView description, TextView scoreView) {
+        if (!(description.getParent() instanceof LinearLayout)) {
+            return;
+        }
+
+        LinearLayout wrapper = (LinearLayout) description.getParent();
+        int scoreIndex = wrapper.indexOfChild(scoreView);
+        if (scoreIndex <= 0) {
+            return;
+        }
+
+        agree(description, false);
+        agree(wrapper.getChildAt(scoreIndex - 1), false);
+        agree(scoreView, false);
+        wrapper.setGravity(Gravity.CENTER_VERTICAL);
+
+        ViewGroup.LayoutParams params = wrapper.getLayoutParams();
+        params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+        wrapper.setLayoutParams(params);
     }
 }

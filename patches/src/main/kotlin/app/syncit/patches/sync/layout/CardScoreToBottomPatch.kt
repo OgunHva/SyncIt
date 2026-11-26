@@ -25,8 +25,9 @@ internal val postDescriptionFingerprint = Fingerprint(
 val cardScoreToBottomPatch = patch(
     name = "Move the card score to the bottom",
     description = "Splits the score line out of the post description in the list, compact and " +
-            "smaller card layouts, so the title stays at the top, the author and flair follow with " +
-            "even gaps, and the points and comments sit at the bottom. Full card layouts are unchanged."
+            "smaller card layouts, then stretches the text over the full row height: the title sits " +
+            "at the top, the points and comments at the bottom, and the author line and flair share " +
+            "the space between them. Full card layouts are unchanged."
 ) {
     compatibleWith(SYNC_FOR_REDDIT)
 
