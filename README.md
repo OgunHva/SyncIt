@@ -19,7 +19,7 @@ behaviour that still matter when the app runs today.
 
 | Patch | Description |
 |---|---|
-| **Keep links in post previews** | Keeps links in the text under a post tappable in feed and card previews, where Sync otherwise drops every span it built. Images are still left out of previews, so feeds stay as light as before. |
+| **Keep links in post previews** | Keeps links in the text under a post tappable in feed and card previews, where Sync otherwise drops them. Only the links are restored, so text keeps the size chosen in settings and images stay out of previews. |
 
 ## Building
 
@@ -36,8 +36,9 @@ The patch bundle is written to `patches/build/libs/patches-<version>.mpp`.
 
 - The patched APK is signed with the patcher's key, so uninstall the original app before
   installing. The output is APK Signature Scheme v2 only, which means Android 7.0 or newer.
-- The patch restores text spans (links, bold, italic) in previews. Image spans are still
-  released, so previews do not start loading pictures they did not load before.
+- The patch restores link spans only. Other formatting spans (including the 1.25x size Sync
+  applies to some link sources) stay dropped, so preview text keeps your configured size and
+  image loading stays lazy.
 
 ## Credits and license
 

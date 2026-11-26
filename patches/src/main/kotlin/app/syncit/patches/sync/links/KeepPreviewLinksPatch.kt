@@ -17,7 +17,8 @@ private const val EXTENSION_CLASS_DESCRIPTOR =
 val keepPreviewLinksPatch = patch(
     name = "Keep links in post previews",
     description = "Keeps links in the text under a post tappable in feed previews, " +
-            "where Sync otherwise drops every span it built.",
+            "where Sync otherwise drops them. Only the links are restored, so the text keeps " +
+            "the size chosen in the app's settings.",
     default = true
 ) {
     compatibleWith(SYNC_FOR_REDDIT)

@@ -1,7 +1,5 @@
 package app.syncit.extension;
 
-import android.text.style.ReplacementSpan;
-
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -15,8 +13,9 @@ import java.util.List;
  * text around it, and doing nothing when tapped, because the span that would have answered is
  * gone.
  *
- * <p>The dropping is kept for the images. They are what makes a preview expensive, and letting
- * them stand would have a feed loading pictures it does not today. Everything else is put back.
+ * <p>Only the link spans are put back. The other spans are left dropped on purpose: the app
+ * scales a link's text by 1.25 when its "large link sources" setting is on, and restoring the
+ * size spans alongside the links would draw them larger than the text size the user chose.
  *
  * <p>Based on the approach of Patcheddit and Sync Up (GPL-3.0), adapted for this patch bundle.
  *
@@ -56,11 +55,11 @@ public final class KeepPreviewLinksPatch {
         }
     }
 
-    /** Everything standing over the text that is not an image. */
+    /** The links standing over the text, and nothing else. */
     private static List<Object> worthKeeping(oc.c builder) throws Exception {
         List<Object> kept = new ArrayList<>();
         for (Object entry : held(builder)) {
-            if (!(spanOf(entry) instanceof ReplacementSpan)) {
+            if (spanOf(entry) instanceof mb.d) {
                 kept.add(entry);
             }
         }

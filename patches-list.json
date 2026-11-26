@@ -1,10 +1,10 @@
 {
   "NOTE": "Do NOT manually edit this file. This file is automatically updated when semantic release (release.yml) runs. Manually editing this file can break your releases and break third party tools that use this file.",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "patches": [
     {
       "name": "Keep links in post previews",
-      "description": "Keeps links in the text under a post tappable in feed previews, where Sync otherwise drops every span it built.",
+      "description": "Keeps links in the text under a post tappable in feed previews, where Sync otherwise drops them. Only the links are restored, so the text keeps the size chosen in the app's settings.",
       "default": true,
       "category": null,
       "compatiblePackages": [
