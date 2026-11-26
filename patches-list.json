@@ -1,6 +1,6 @@
 {
   "NOTE": "Do NOT manually edit this file. This file is automatically updated when semantic release (release.yml) runs. Manually editing this file can break your releases and break third party tools that use this file.",
-  "version": "1.6.0",
+  "version": "1.6.1",
   "patches": [
     {
       "name": "Color comment scores",
@@ -112,7 +112,7 @@
     },
     {
       "name": "Move the card score to the bottom",
-      "description": "Splits the score line out of the post description in the smaller card layout, so the title stays at the top, the author and flair follow with even gaps, and the points and comments sit at the bottom. List, compact and full card layouts are unchanged.",
+      "description": "Splits the score line out of the post description in the list, compact and smaller card layouts, so the title stays at the top, the author and flair follow with even gaps, and the points and comments sit at the bottom. Full card layouts are unchanged.",
       "default": true,
       "category": null,
       "compatiblePackages": [

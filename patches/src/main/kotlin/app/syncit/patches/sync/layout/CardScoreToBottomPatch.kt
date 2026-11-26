@@ -24,35 +24,41 @@ internal val postDescriptionFingerprint = Fingerprint(
 @Suppress("unused")
 val cardScoreToBottomPatch = patch(
     name = "Move the card score to the bottom",
-    description = "Splits the score line out of the post description in the smaller card layout, " +
-            "so the title stays at the top, the author and flair follow with even gaps, and the " +
-            "points and comments sit at the bottom. List, compact and full card layouts are unchanged."
+    description = "Splits the score line out of the post description in the list, compact and " +
+            "smaller card layouts, so the title stays at the top, the author and flair follow with " +
+            "even gaps, and the points and comments sit at the bottom. Full card layouts are unchanged."
 ) {
     compatibleWith(SYNC_FOR_REDDIT)
 
     dependsOn(sharedExtensionPatch)
 
     execute {
-        resourceXml("res/layout/holder_smaller_cards.xml").use { layout ->
-            val wrapper =
-                layout.elementByAttribute("android:id", "@id/holder_list_text_wrapper")
-            val description =
-                layout.elementByAttribute("android:id", "@id/holder_list_description")
-            val flair =
-                layout.elementByAttribute("android:id", "@id/holder_list_generic_extra_wrapper")
+        listOf(
+            "res/layout/holder_list.xml",
+            "res/layout/holder_compact.xml",
+            "res/layout/holder_smaller_cards.xml",
+        ).forEach { path ->
+            resourceXml(path).use { layout ->
+                val wrapper =
+                    layout.elementByAttribute("android:id", "@id/holder_list_text_wrapper")
+                val description =
+                    layout.elementByAttribute("android:id", "@id/holder_list_description")
+                val flair =
+                    layout.elementByAttribute("android:id", "@id/holder_list_generic_extra_wrapper")
 
-            // Equal gaps between the lines that the title and the score sit between.
-            description.setAttribute("android:layout_marginTop", "4.0dip")
-            flair.setAttribute("android:layout_marginTop", "4.0dip")
+                // Equal gaps between the lines that the title and the score sit between.
+                description.setAttribute("android:layout_marginTop", "4.0dip")
+                flair.setAttribute("android:layout_marginTop", "4.0dip")
 
-            // The score line is moved here at runtime, after the flair.
-            wrapper.insertChild(flair.index + 1, "TextView") {
-                setAttribute("android:tag", "syncit_card_score")
-                setAttribute("android:visibility", "gone")
-                setAttribute("android:layout_width", "fill_parent")
-                setAttribute("android:layout_height", "wrap_content")
-                setAttribute("android:layout_marginTop", "4.0dip")
-                setAttribute("android:includeFontPadding", "false")
+                // The score line is moved here at runtime, after the flair.
+                wrapper.insertChild(flair.index + 1, "TextView") {
+                    setAttribute("android:tag", "syncit_card_score")
+                    setAttribute("android:visibility", "gone")
+                    setAttribute("android:layout_width", "fill_parent")
+                    setAttribute("android:layout_height", "wrap_content")
+                    setAttribute("android:layout_marginTop", "4.0dip")
+                    setAttribute("android:includeFontPadding", "false")
+                }
             }
         }
 
