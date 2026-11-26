@@ -21,6 +21,7 @@ behaviour that still matter when the app runs today.
 |---|---|
 | **Keep links in post previews** | Keeps links in the text under a post tappable in feed and card previews, where Sync otherwise drops them. Only the links are restored, so text keeps the size chosen in settings and images stay out of previews. |
 | **Color post scores** | Colors a post's points orange when positive and purple when negative. The larger the score, the stronger the color. A vote color still takes priority on posts you have voted on. |
+| **Color comment scores** | Colors a comment's points orange when positive and purple when negative. The larger the score, the stronger the color. Hidden scores are left alone. |
 | **Use /user/ for profiles** | Replaces the deprecated /u/ profile endpoint with /user/, which Reddit still serves. User profile requests (about, friend and unfriend) use this path, so profiles fail to load without it. |
 | **Show commenter's top subreddits** | Adds a line under each comment with the three subreddits the commenter is most active in, worked out from their recent public activity on Project Arctic Shift. Answers are cached per author; the archive is asked in the background. |
 
