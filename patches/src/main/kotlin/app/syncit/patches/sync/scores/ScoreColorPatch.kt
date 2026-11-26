@@ -96,7 +96,7 @@ private fun colorScoreWrites(
             """
                 $readScore
                 move-result v$tempRegister
-                invoke-static { v$builderRegister, v$startRegister, v$tempRegister }, $EXTENSION_CLASS_DESCRIPTOR->apply(Loc/c;III)V
+                invoke-static { v$builderRegister, v$startRegister, v$tempRegister }, $EXTENSION_CLASS_DESCRIPTOR->apply(Loc/c;II)V
             """
         )
     }
