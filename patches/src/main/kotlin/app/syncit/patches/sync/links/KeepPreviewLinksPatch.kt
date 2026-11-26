@@ -5,6 +5,7 @@ import app.morphe.patcher.extensions.InstructionExtensions.replaceInstruction
 import app.morphe.patcher.patch.patch
 import app.morphe.patcher.util.getReference
 import app.syncit.patches.sync.Constants.SYNC_FOR_REDDIT
+import app.syncit.patches.sync.extension.sharedExtensionPatch
 import com.android.tools.smali.dexlib2.Opcode
 import com.android.tools.smali.dexlib2.iface.instruction.FiveRegisterInstruction
 import com.android.tools.smali.dexlib2.iface.reference.FieldReference
@@ -23,7 +24,7 @@ val keepPreviewLinksPatch = patch(
 ) {
     compatibleWith(SYNC_FOR_REDDIT)
 
-    extendWith("extensions/syncit.mpe")
+    dependsOn(sharedExtensionPatch)
 
     execute {
         val method = parseBodyFingerprint.method
